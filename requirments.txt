@@ -1,0 +1,259 @@
+Why Random Forest?
+	•	Works well with structured banking data
+	•	Handles non-linear relationships
+	•	Produces probability scores
+	•	Good for classification problems
+
+⸻
+
+Training Process
+	1.	Load merged dataset
+	2.	Create target column → Next_Best_Product
+	3.	Select features
+	4.	Encode Town using get_dummies
+	5.	Train model
+	6.	Save:
+	•	nbp_model.pkl
+	•	input_features.pkl
+
+⸻
+
+📊 4️⃣ Feature Engineering Logic
+
+These are the features used:
+	•	Age
+	•	FD_Total_Amount
+	•	FD_Avg_Rate
+	•	Loan_Total
+	•	Loan_Avg_Rate
+	•	Salary
+	•	Town (converted to dummy variables)
+
+Example:
+
+If town = Colombo
+Town_Colombo = 1
+Town_Kandy = 0
+Town_Galle = 0
+🎯 5️⃣ Prediction Logic (Very Important)
+
+When you click “Generate Recommendation”:
+	1.	Inputs are collected
+	2.	They are converted into the same feature format used during training
+	3.	Missing columns are filled with 0
+	4.	Model runs:model.predict_proba(X)
+📈 6️⃣ How Probabilities Are Calculated
+
+Random Forest:
+	•	Creates many decision trees
+	•	Each tree votes for a class
+	•	Probability = percentage of trees voting for that class
+
+Example:
+
+200 trees:
+	•	126 trees → Savings
+	•	73 trees → FD
+	•	1 tree → Wealth
+
+So:
+
+Savings = 126 / 200 = 0.63 = 63%
+
+That’s why you see 63.20%
+
+This is REAL probability from the trained model.
+
+⸻
+
+🎯 7️⃣ Purpose Alignment Logic (Very Important)
+
+You added logic:
+
+If customer selects:
+	•	Loan
+	•	FD
+	•	Savings
+
+The system tries to find a label that matches that purpose.
+
+Example:
+
+If user selects Loan:if "loan" in label.lower()
+If found → show that as main recommendation.
+
+If not found → show highest probability class.
+
+This prevents wrong alignment issues.
+If found → show that as main recommendation.
+
+If not found → show highest probability class.
+
+This prevents wrong alignment issues.
+If found → show that as main recommendation.
+
+If not found → show highest probability class.
+
+This prevents wrong alignment issues.
+💰 8️⃣ EMI Simulation (Loan Only)
+
+When Loan is selected, EMI is calculated.
+
+Formula used:
+
+EMI formula:
+
+EMI = P × r × (1+r)^n / ((1+r)^n - 1)
+
+Where:
+
+P = principal (loan amount)
+r = monthly interest rate
+n = tenure in months
+
+Monthly rate:
+
+r = annual_rate / 12 / 100
+
+Example:
+
+Loan = 500,000
+Interest = 14%
+Tenure = 36 months
+
+EMI ≈ 17,088 LKR
+
+This is financial mathematics, not ML.
+
+This gives real financial simulation.
+
+⸻
+
+📋 9️⃣ Action Plan Logic (FULL DETAILED EXPLANATION)
+
+The action plan is based on the predicted product.
+
+The system checks:soft_actions(product_label)
+🟢 If Product = Loan
+
+Outputs can include:
+
+Offer:
+	•	Personal loan
+	•	SME loan
+	•	FD-secured loan
+	•	Business expansion loan
+	•	Salary-based loan
+
+Bundle:
+	•	Insurance add-on
+	•	Credit protection cover
+	•	Auto debit setup
+	•	EMI auto-deduction
+	•	Loan top-up eligibility
+	•	FD pledge option
+
+Actions:
+	•	Run EMI simulation
+	•	Share required document checklist
+	•	Pre-approval check
+	•	Credit scoring
+	•	Risk profiling
+	•	KYC update
+	•	Schedule branch appointment
+	•	Assign Relationship Manager
+
+⸻
+
+🟢 If Product = Savings
+
+Offer:
+	•	Savings account upgrade
+	•	Recurring deposit
+	•	Goal-based savings plan
+
+Bundle:
+	•	Auto-transfer from salary
+	•	FD maturity sweep
+	•	Mobile banking alerts
+	•	Standing order setup
+	•	Child education savings plan
+
+Actions:
+	•	Set monthly savings target
+	•	Setup auto debit
+	•	Send digital brochure
+	•	Financial planning session
+
+⸻
+
+🟢 If Product = FD
+
+Offer:
+	•	Fixed Deposit
+	•	Senior Citizen FD
+	•	Short-term FD
+	•	Tax saving FD
+
+Bundle:
+	•	FD rollover option
+	•	Interest payout choice (monthly/quarterly)
+	•	Linked savings account
+	•	Wealth consultation
+
+Actions:
+	•	Lock interest rate
+	•	Schedule deposit opening
+	•	Provide FD calculator
+🟢 If Product = Wealth / Investment
+
+Offer:
+	•	Mutual fund
+	•	Treasury bill
+	•	Investment portfolio
+
+Bundle:
+	•	Risk profiling
+	•	Asset allocation plan
+	•	Portfolio monitoring
+
+Actions:
+	•	Schedule RM meeting
+	•	Provide investment brochure
+	•	Start onboarding
+
+⸻
+
+📞 10️⃣ Officer Call Script Logic
+
+The system auto-generates:
+	•	Personalized greeting
+	•	Product name
+	•	Probability
+	•	Purpose
+	•	Call-to-action
+
+Example:
+
+“Based on your profile (purpose: Loan), we have a suitable offer for you: Personal Loan (confidence ~ 63%).”
+
+This reduces manual effort of officers.
+
+⸻
+
+🖥 11️⃣ What Exactly This System Outputs
+
+Your system outputs:
+	1.	Customer validation (existing/new)
+	2.	Customer snapshot
+	3.	Purpose selection
+	4.	Dynamic input form
+	5.	Top 3 product recommendations
+	6.	Probability scores
+	7.	Purpose-aligned recommendation
+	8.	Cross-sell recommendations
+	9.	Action plan
+	10.	EMI simulation (loan only)
+	11.	Copy-ready call script
+
+This is a complete decision-support system.
